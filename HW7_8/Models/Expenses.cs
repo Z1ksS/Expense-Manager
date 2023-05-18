@@ -13,11 +13,14 @@ namespace HW7_8.Models
         [Column(TypeName = "decimal(10,1)")]
         public decimal MoneySpent { get; set; }
 
-        public DateTime Date { get; set; }
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime Date { get; set; } = DateTime.Now;
 
         public string? Comment { get; set; }
 
         [Required]
-        public Category Category { get; set; }
+        public int CategoryId { get; set; }
+
+        public Category? Category { get; set; }
     }
 }

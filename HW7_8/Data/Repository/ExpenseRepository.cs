@@ -14,8 +14,8 @@ namespace HW7_8.Data.Repository
 
         public IEnumerable<Expenses> GetAllExpenses()
         {
-            var categories = dbContext.expenses.ToList();
-            return categories;
+            var expenses = dbContext.expenses.ToList();
+            return expenses;
         }
 
         public Expenses GetExpenseById(int id)
