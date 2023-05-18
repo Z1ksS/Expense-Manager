@@ -10,6 +10,7 @@ namespace HW7_8.Models
         public int Id { get; set; }
 
         [Required]
+        [Column(TypeName = "decimal(10,1)")]
         public decimal MoneySpent { get; set; }
 
         public DateTime Date { get; set; }

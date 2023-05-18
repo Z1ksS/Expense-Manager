@@ -11,6 +11,7 @@ namespace HW7_8.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Food" },
                 new Category { Id = 2, Name = "Transport" },

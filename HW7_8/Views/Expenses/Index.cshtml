@@ -1,0 +1,86 @@
+﻿@model IEnumerable<HW7_8.Models.Expenses>
+
+@{
+    ViewBag.Title = "Expenses";
+}
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />  
+<script src="~/lib/jquery/dist/jquery.min.js"></script>  
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>  
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>  
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.css" rel="stylesheet">  
+
+
+
+<div class="align-self-center">
+    <h1 class="display-4">@ViewBag.Title</h1>
+
+    <button class="btn btn-primary" onclick="AddEditExpense(0)">Add expense</button>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Category)</th>
+                <th>@Html.DisplayNameFor(model => model.MoneySpent)</th>
+                <th>@Html.DisplayNameFor(model => model.Date)</th>
+                <th>@Html.DisplayNameFor(model => model.Comment)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var expense in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => expense.Category)</td>
+                    <td>@Html.DisplayFor(modelItem => expense.MoneySpent)</td>
+                    <td>@Html.DisplayFor(modelItem => expense.Date)</td>
+                    <td>@Html.DisplayFor(modelItem => expense.Comment)</td>
+                    <td>
+                        <div class="button-container">
+                            <button class="btn btn-secondary" onclick="AddEditExpense(@expense.Id)">Edit</button>
+                        </div>
+
+                        <div class="button-container">
+                            <form asp-controller="Expenses" asp-action="Delete" asp-route-id="@expense.Id" onsubmit="return confirmDelete(event)">
+                                <button class="btn btn-danger" type="submit">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="expenseFormModel" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="title" class="modal-title">Add Expense</h3>
+            </div>
+            <div class="modal-body" id="expenseFormModelDiv">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var AddEditExpense = function(Id) {
+        var url = "/Expenses/AddEditExpense?Id=" + Id;
+
+        $("#expenseFormModelDiv").load(url, function () {
+            $("#expenseFormModel").modal("show");
+        });
+
+        $('#expenseFormModel').on('shown.bs.modal', function () {  
+  
+            $('#calender-container .input-group.date').datepicker({  
+                todayBtn: true,  
+                calendarWeeks: true,  
+                todayHighlight: true,  
+                autoclose: true,  
+                container: '#expenseFormModel modal-body'  
+            });  
+  
+        });
+    }
+</script>

@@ -20,9 +20,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Expanses\" />
-    <Folder Include="Views\Category\" />
-  </ItemGroup>
-
 </Project>

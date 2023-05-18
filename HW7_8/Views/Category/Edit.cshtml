@@ -1,0 +1,33 @@
+﻿@model HW7_8.Models.Category
+
+@{
+    ViewBag.Title = "Edit category";
+}
+
+<div class="d-flex flex-column">
+    <h1 class="display-4">@ViewBag.Title</h1>
+
+    <form asp-controller="Category" asp-action="Edit" method="post" class="form-horizontal" onsubmit="return confirmDelete(event)">
+        <div class="row required">
+            <label asp-for="Name" class="form-label control-label"></label>
+            <div>
+                <input asp-for="Name" class="form-control" placeholder="Enter name"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            <input class="btn btn-success" type="submit" value="Confirm" />
+            <a class="btn btn-secondary" asp-controller="Category" asp-action="Index">Return</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    function confirmDelete(event) {
+        var confirmation = confirm("Are you sure you want to change this category?");
+
+        if (!confirmation) {
+            event.preventDefault();
+        }
+    }
+</script>
